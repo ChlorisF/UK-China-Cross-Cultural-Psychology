@@ -1,0 +1,17 @@
+﻿Item,type,UK,CN,Diff,t,df,p,p.adj,p.adj.signif,effsize,lower,upper,magnitude
+Asian-Angry,"ER-S Accuracy, %",76.29,71.21,5.08,3.06,378.71,0.002,0.04,*,0.313890747,0.11,0.51,small
+Asian-Fear,"ER-S Accuracy, %",72.55,69.27,3.28,2.21,379,0.03,0.44,ns,0.226902172,0.04,0.44,small
+Asian-Happy,"ER-S Accuracy, %",85.14,88.53,-3.39,-2.8,352.57,0.005,0.09,ns,-0.287441393,-0.48,-0.09,small
+West-Angry,"ER-S Accuracy, %",74.93,66.31,8.63,5.36,378.02,<.001,<.001,****,0.549524566,0.34,0.77,moderate
+West-Fear,"ER-S Accuracy, %",72.44,65.38,7.06,4.71,376.65,<.001,<.001,****,0.482705759,0.28,0.66,small
+West-Happy,"ER-S Accuracy, %",85.45,83.29,2.16,1.88,373.99,0.06,0.98,ns,0.192492091,-0.01,0.4,negligible
+Asian-congruent,"ER-F Accuracy, %",85.83,80.73,5.09,3.39,358,<.001,0.013,*,0.34622803,0.17,0.54,small
+Asian-incongruent,"ER-F Accuracy, %",81.95,72.49,9.46,4.68,344.9,<.001,<.001,****,0.477704616,0.27,0.66,small
+West-congruent,"ER-F Accuracy, %",83.16,76.26,6.9,4.5,375.79,<.001,<.001,***,0.460272933,0.27,0.67,small
+West-incongruent,"ER-F Accuracy, %",81.18,66.69,14.5,7.26,360.53,<.001,<.001,****,0.741766974,0.52,0.97,moderate
+SART fixed,"SART Accuracy, %",85.88,82.32,3.56,1.97,377.96,0.049,0.78,ns,0.202412109,0,0.41,small
+SART random,"SART Accuracy, %",61.34,54.54,6.8,3.18,378.82,0.002,0.03,*,0.325256261,0.12,0.53,small
+BDI,Mental Health Scores,13.24,12.26,0.98,0.91,374.96,0.36,1,ns,0.093215586,-0.1,0.3,negligible
+BIS,Mental Health Scores,62.03,62.52,-0.48,-0.41,378.62,0.68,1,ns,-0.042416603,-0.26,0.16,negligible
+OCI,Mental Health Scores,16.56,21.46,-4.9,-3.8,377.12,<.001,0.003,**,-0.39,-0.62,-0.18,small
+STAI,Mental Health Scores,46.61,45.81,0.81,0.62,376.22,0.54,1,ns,0.063483747,-0.13,0.27,negligible

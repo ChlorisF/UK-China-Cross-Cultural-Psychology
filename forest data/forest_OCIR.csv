@@ -1,0 +1,19 @@
+Question,UK,CN,Diff,t,df,p,p.adj,p.adj.signif,effsize,conf.low,conf.high,magnitude
+01. I have saved up so many things that they get in the way,1.08 ,1.09 ,-0.01 ,-0.12 ,372.35 ,0.91 ,1,ns,-0.012222304,-0.23,0.19,negligible
+02. I check things more often than necessary,1.61 ,1.49 ,0.13 ,1.03 ,364.44 ,0.31 ,1,ns,0.105311293,-0.1,0.3,negligible
+03. I get upset if objects are not arranged properly,1.14 ,1.38 ,-0.23 ,-1.91 ,378.78 ,0.06 ,1,ns,-0.196010955,-0.4,0.0061,negligible
+04. I feel compelled to count while I am doing things,0.91 ,1.35 ,-0.44 ,-3.80 ,377.88 ,<.001,0.003,**,-0.38950522,-0.6,-0.2,small
+05. I find it difficult to touch an object when I know it has been touched by strangers or certain people,0.58 ,1.19 ,-0.61 ,-5.53 ,371.12 ,<.001,<.001,****,-0.565934113,-0.8,-0.35,moderate
+06. I find it difficult to control my own thoughts,1.30 ,1.33 ,-0.03 ,-0.26 ,372.66 ,0.79 ,1,ns,-0.026958338,-0.23,0.19,negligible
+07. I collect things I don't need,0.99 ,1.12 ,-0.13 ,-1.25 ,362.07 ,0.21 ,1,ns,-0.128539527,-0.34,0.08,negligible
+"08. I repeatedly check doors, windows, drawers etc.",0.89 ,1.03 ,-0.14 ,-1.27 ,370.76 ,0.20 ,1,ns,-0.13066152,-0.34,0.07,negligible
+09. I get upset if others change the way I have arranged things,1.22 ,1.39 ,-0.17 ,-1.32 ,373.79 ,0.19 ,1,ns,-0.135393745,-0.33,0.07,negligible
+10. I feel I have to repeat certain numbers,0.35 ,0.75 ,-0.39 ,-4.22 ,370.94 ,<.001,<.001,***,-0.431843334,-0.64,-0.23,small
+11. I sometimes have to wash or clean myself simply because I feel contaminated,0.62 ,0.80 ,-0.18 ,-1.76 ,378.16 ,0.08 ,1,ns,-0.17981743,-0.38,0.01,negligible
+12. I am upset by unpleasant thoughts that come into my mind against my will,1.05 ,1.32 ,-0.27 ,-2.28 ,373.03 ,0.02 ,0.41 ,ns,-0.234104826,-0.44,-0.03,small
+13. I avoid throwing things away because I am afraid I might need them later,1.25 ,1.80 ,-0.55 ,-4.72 ,375.47 ,<.001,<.001,****,-0.484043976,-0.72,-0.27,small
+14. I repeatedly check gas and water taps and light switches after turning them off,0.74 ,1.27 ,-0.52 ,-4.75 ,378.72 ,<.001,<.001,****,-0.487183266,-0.72,-0.3,small
+15. I need things to be arranged in a particular order,0.88 ,1.20 ,-0.31 ,-2.78 ,372.56 ,0.006 ,0.10 ,ns,-0.285589106,-0.51,-0.08,small
+16. I feel that there are good and bad numbers,0.58 ,1.23 ,-0.64 ,-5.75 ,378.92 ,<.001,<.001,****,-0.588785777,-0.83,-0.38,moderate
+17. I wash my hands more often and longer than necessary,0.48 ,0.84 ,-0.36 ,-3.55 ,375.89 ,<.001,0.008 ,**,-0.363216226,-0.58,-0.15,small
+18. I frequently get nasty thoughts and have difficulty getting rid of them,0.87 ,0.89 ,-0.02 ,-0.18 ,368.97 ,0.86 ,1,ns,-0.018677844,-0.24,0.18,negligible
