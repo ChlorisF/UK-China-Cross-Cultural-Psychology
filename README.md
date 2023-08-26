@@ -1,7 +1,7 @@
 # Cultural-generalisability-2023
 ## full_data.csv 
-The dataset contains processed and compiled data necessary for data analyses. Different nodes (for randomisation purposes) under the same measure are compiled into single files. Information potentially pertaining to participant identity has been removed. 
-*Note* that participant IDs in the datasets were anonymised and do not contain tracking information.
+The dataset contains processed and compiled data necessary for data analyses. Information potentially pertaining to participant identity has been removed. 
+**Note** that participant IDs in the datasets were anonymised and do not contain tracking information.
 
 ## Analyses and figures.R 
 The R script can be used to replicate plot-drawing and statistical analyses
