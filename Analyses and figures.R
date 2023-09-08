@@ -1,6 +1,6 @@
 ### ANALASES AND FIGURES
 # Cultural generalisability of psychological measures
-# 10-07-23
+# 20-08-23
 # Boyin Feng
 
 # Prepared with R Studio version 2021.09.0
@@ -20,10 +20,8 @@ if (!require(effsize)) install.packages("effsize"); require(effsize)
 if (!require(metafor)) install.packages("metafor"); require(metafor)
 if (!require(emmeans)) install.packages("emmeans"); require(emmeans)
 if (!require(psych)) install.packages("psych"); require(psych)
-if (!require(ggstatsplot)) {install.packages("ggstatsplot"); require(ggstatsplot)}
-if (!require(gridExtra)) {install.packages("gridExtra"); require(gridExtra)}
-if (!require(glmmTMB)) {install.packages("glmmTMB"); require(glmmTMB)}
-if (!require(htmlTable)) install.packages("htmlTable"); require(htmlTable)
+if (!require(meta)) {install.packages("meta"); require(meta)}
+if (!require(corrplot)) {install.packages("corrplot"); require(corrplot)}
 
 #### ==== Data Setup ==== 
 # set up working directory [CHANGE into own directory]
@@ -113,7 +111,9 @@ forest <- stat.test %>%
 library(forestplot)
 library(meta)
 library(metafor)
-
+forest <- read.csv("forest_all.csv")
+forest <- forest %>%
+  rename(Item = 锘縄tem) # skip this step if the dataset reads as Item already
 forest <- tibble::tibble(mean  = forest$effsize,
                          lower = forest$lower,
                          upper = forest$upper,
@@ -151,6 +151,82 @@ forplot <- forest.meta(sub,
                        rightcols = c("UK", "p","adjusted_p"),
                        rightlabs = c("UK", "P","adjusted P"),
                        test.subgroup = FALSE)
+drapery(m.gen,
+        labels = "studlab",
+        type = "pvalue", # or zvalue
+        legend = F)
+
+# correlation matrices between variables
+dat <- read.csv("full_data.csv")
+dat_UK <- subset(dat, nationality == "UK")
+dat_CN <- subset(dat, nationality == "China")
+
+## select columns for correlations
+UK_cor <- dat_UK %>% 
+  select(BDI, BIS, OCIR, STAI, 
+         ER_Happy, ER_Angry, ER_Fearful, EF_Happy_c, EF_Happy_inc, EF_Angry_c, EF_Angry_inc,
+         fixed_nogo_acc, random_nogo_acc) %>% 
+  rename(SART_fixed = fixed_nogo_acc, SART_random = random_nogo_acc,
+         ES_Happy = ER_Happy, ES_Angry = ER_Angry, ES_Fear = ER_Fearful)
+## compute correlation coefficients and p-values
+cor_UK <- cor(UK_cor) 
+p.mat.UK <- cor.mtest(UK_cor, conf.level = 0.95)
+
+## draw correlation matrix
+jpeg(file='corrplot_UK_spearman.jpeg', height=2300, width=2500, res = 250)
+corrplot(cor_UK, 
+         type="lower", method="circle", 
+         addCoef.col ='black', number.cex = 1.1, 
+         tl.pos="lt", tl.col="black",  tl.offset=1, tl.srt=45,
+         # col = COL2('RdBu'),
+         # sig.level = c(0.001, 0.01, 0.05), pch.cex = 2.3,
+         tl.cex = 1.25,cl.cex = 1.25,
+         # is.corr = FALSE, 
+         pch.col = 'grey20')$corrPos -> p1
+text(p1$x, p1$y, round(p1$corr, 2), cex = 1.1)
+
+corrplot(cor_UK, p.mat = p.mat.UK,add=T, 
+         type="upper", method="color",
+         diag=F, tl.pos="n", 
+         sig.level = c(0.001, 0.01, 0.05), pch.cex = 2,
+         cl.cex = 1.25,
+         insig = 'label_sig', pch.col = 'grey20')
+
+n <- nrow(cor_UK)
+dev.off()
+
+# China plot
+CN_cor <- dat_CN %>% 
+  select(BDI, BIS, OCIR, STAI, 
+         ER_Happy, ER_Angry, ER_Fearful, EF_Happy_c, EF_Happy_inc, EF_Angry_c, EF_Angry_inc,
+         fixed_nogo_acc, random_nogo_acc) %>% 
+  rename(SART_fixed = fixed_nogo_acc, SART_random = random_nogo_acc,
+         ES_Happy = ER_Happy, ES_Angry = ER_Angry, ES_Fear = ER_Fearful)
+## compute correlation coefficients and p-values
+cor_CN <- cor(CN_cor, method = "spearman") # change method from default pearson to spearman
+p.mat.CN <- cor.mtest(CN_cor, conf.level = 0.95)
+
+## draw correlation matrix
+jpeg(file='corrplot_CN_spearman.jpeg', height=2300, width=2500, res = 250)
+corrplot(cor_CN, 
+         type="lower", method="circle", 
+         addCoef.col ='black', number.cex = 1.1, 
+         tl.pos="lt", tl.col="black",  tl.offset=1, tl.srt=45,
+         # col = COL2('RdBu'),
+         # sig.level = c(0.001, 0.01, 0.05), pch.cex = 2.3,
+         tl.cex = 1.25,cl.cex = 1.25,
+         pch.col = 'grey20')$corrPos -> p1
+text(p1$x, p1$y, round(p1$corr, 2), cex = 1.1)
+
+corrplot(cor_CN, p.mat = p.mat.CN,add=T, 
+         type="upper", method="color",
+         diag=F, tl.pos="n", 
+         sig.level = c(0.001, 0.01, 0.05), pch.cex = 2,
+         cl.cex = 1.25,
+         insig = 'label_sig', pch.col = 'grey20')
+
+n <- nrow(cor_CN)
+dev.off()
 
 # demographic comparisons
 library(rcompanion)
