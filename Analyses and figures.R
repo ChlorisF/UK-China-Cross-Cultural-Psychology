@@ -17,10 +17,11 @@ if (!require(dplyr)) install.packages("dplyr"); require(dplyr)
 if (!require(lme4)) install.packages("lme4"); require(lme4)
 if (!require(lmerTest)) install.packages("lmerTest"); require(lmerTest)
 if (!require(effsize)) install.packages("effsize"); require(effsize)
-if (!require(metafor)) install.packages("metafor"); require(metafor)
-if (!require(emmeans)) install.packages("emmeans"); require(emmeans)
-if (!require(psych)) install.packages("psych"); require(psych)
+if (!require(forestplot)) {install.packages("forestplot"); require(forestplot)}
 if (!require(meta)) {install.packages("meta"); require(meta)}
+if (!require(metafor)) install.packages("metafor"); require(metafor)
+if (!require(rcompanion)) install.packages("rcompanion"); require(rcompanion)
+if (!require(psych)) install.packages("psych"); require(psych)
 if (!require(corrplot)) {install.packages("corrplot"); require(corrplot)}
 
 #### ==== Data Setup ==== 
@@ -32,6 +33,7 @@ demo <- read.csv("demo_both.csv")
 ER <- read.csv("ER+Demo_both.csv")
 
 #### ==== Main Analyses ==== 
+library(tidyverse)
 # forest plot for all the measures between groups
 dat_UK <- subset(dat, nationality == "UK")
 dat_CN <- subset(dat, nationality == "China")
@@ -48,7 +50,6 @@ dat_compare <- dat %>%
          EF_Chi_inc = Asian-incongruent,
          EF_West_c = West-congruent,
          ER_West_inc = West-incongruent)
-
 
 ## Transform the data into long format
 ### Put all variables in the same column except `nationality`, the grouping variable
@@ -111,9 +112,9 @@ forest <- stat.test %>%
 library(forestplot)
 library(meta)
 library(metafor)
-forest <- read.csv("forest_all.csv")
+forest <- read.csv("forest_all.csv") # skip this step directly using the vector set above
 forest <- forest %>%
-  rename(Item = 锘縄tem) # skip this step if the dataset reads as Item already
+  rename(Item = 锘縄tem) # skip if the column reads as Item already
 forest <- tibble::tibble(mean  = forest$effsize,
                          lower = forest$lower,
                          upper = forest$upper,
@@ -168,8 +169,9 @@ UK_cor <- dat_UK %>%
          fixed_nogo_acc, random_nogo_acc) %>% 
   rename(SART_fixed = fixed_nogo_acc, SART_random = random_nogo_acc,
          ES_Happy = ER_Happy, ES_Angry = ER_Angry, ES_Fear = ER_Fearful)
+
 ## compute correlation coefficients and p-values
-cor_UK <- cor(UK_cor) 
+cor_UK <- cor(UK_cor) # default method Pearson
 ### define cor.mtest function
 ### mat : is a matrix of data
 ### ... : further arguments to pass to the native R cor.test function
@@ -190,7 +192,7 @@ cor.mtest <- function(mat, ...) {
 p.mat.UK <- cor.mtest(UK_cor, conf.level = 0.95)
 
 ## draw correlation matrix
-jpeg(file='corrplot_UK_spearman.jpeg', height=2300, width=2500, res = 250)
+jpeg(file='corrplot_UK.jpeg', height=2300, width=2500, res = 250)
 corrplot(cor_UK, 
          type="lower", method="circle", 
          addCoef.col ='black', number.cex = 1.1, 
@@ -219,12 +221,13 @@ CN_cor <- dat_CN %>%
          fixed_nogo_acc, random_nogo_acc) %>% 
   rename(SART_fixed = fixed_nogo_acc, SART_random = random_nogo_acc,
          ES_Happy = ER_Happy, ES_Angry = ER_Angry, ES_Fear = ER_Fearful)
+
 ## compute correlation coefficients and p-values
-cor_CN <- cor(CN_cor, method = "spearman") # change method from default pearson to spearman
+cor_CN <- cor(CN_cor) # default method Pearson
 p.mat.CN <- cor.mtest(CN_cor, conf.level = 0.95)
 
 ## draw correlation matrix
-jpeg(file='corrplot_CN_spearman.jpeg', height=2300, width=2500, res = 250)
+jpeg(file='corrplot_CN.jpeg', height=2300, width=2500, res = 250)
 corrplot(cor_CN, 
          type="lower", method="circle", 
          addCoef.col ='black', number.cex = 1.1, 
@@ -277,7 +280,7 @@ chisq.test(sex)
 t.test(demo_UK$education, demo_CH$education)
 cohen.d(demo_UK$education, demo_CH$education)
 
-#### ==== Main Analyses ==== 
+#### ==== Supplementary Analyses ==== 
 # forest plot for OCIR question-wise comparison
 for_OCIR <- read.csv("forest_OCIR.csv")
 
@@ -316,7 +319,6 @@ forplot_OCIR <- forest.meta(m.gen.ocir,
                        rightlabs = c("UK", "P","adjusted P"),
                        test.subgroup = FALSE)
 
-
 # ANCOVA models
 library(lsr)
 library(lmtest)
@@ -330,7 +332,6 @@ summary(m2_BDI)
 lrtest(m2_BDI, m_BDI)
 ### Compare model metrics
 AIC(m_BDI); AIC(m2_BDI) 
-
 
 ## BIS
 m_BIS <- lm(BIS_Score ~ sex + age + education, data = dat)
