@@ -170,6 +170,23 @@ UK_cor <- dat_UK %>%
          ES_Happy = ER_Happy, ES_Angry = ER_Angry, ES_Fear = ER_Fearful)
 ## compute correlation coefficients and p-values
 cor_UK <- cor(UK_cor) 
+### define cor.mtest function
+### mat : is a matrix of data
+### ... : further arguments to pass to the native R cor.test function
+cor.mtest <- function(mat, ...) {
+  mat <- as.matrix(mat)
+  n <- ncol(mat)
+  p.mat<- matrix(NA, n, n)
+  diag(p.mat) <- 0
+  for (i in 1:(n - 1)) {
+    for (j in (i + 1):n) {
+      tmp <- cor.test(mat[, i], mat[, j], ...)
+      p.mat[i, j] <- p.mat[j, i] <- tmp$p.value
+    }
+  }
+  colnames(p.mat) <- rownames(p.mat) <- colnames(mat) 
+  p.mat
+}
 p.mat.UK <- cor.mtest(UK_cor, conf.level = 0.95)
 
 ## draw correlation matrix
