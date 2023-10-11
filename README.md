@@ -1,7 +1,9 @@
 # Cultural-generalisability-2023
-The current repository contains compiled datasets and codes for relevant data analyses and visualisation used in "Standard Cognitive and Mental Health Measures May Not Generalise Across Cultures" (2023). Breakdown step-by-step codes/data are available upon request. If you encounter any technical problems while implementing the codes, please let us know by contacting one of the corresponding authors, or raise an issue here.
+The current repository contains compiled datasets and codes for relevant data analyses and visualisation used in "Standard Cognitive and Mental Health Measures May Not Generalise Across Cultures" (2023). Breakdown step-by-step codes/data are available upon request. 
 
-**Feel free to fork and play with the data yourself!**
+If you encounter any technical problems while implementing the codes, please let us know by contacting one of the corresponding authors, or raise an issue here.
+
+**Feel free to fork and play with the data yourself! 🤩🤩🤩**
 
 ## full_data.csv 
 The dataset contains processed data for data analyses. Information potentially pertaining to participant identity has been removed. 
